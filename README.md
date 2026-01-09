@@ -1,9 +1,11 @@
-# IGIGI Synthesis Engine - v0.4 (Phase 4)
+# IGIGI Synthesis Engine - v0.5
+
+Why v0.5 - the best way to get where we want is to get to the midway as soon as possible!
 
 **IGIGI** is now capable of **Engineering Synthesis**.
 It can solve for unknown design parameters (like gear teeth counts) that satisfy high-level constraints.
 
-## New in v0.4
+## New in v0.5
 *   **Integer Inference**: Automatically treats `_teeth` or `_count` variables as Integers in the solver.
 *   **Material Injection**: The Reasoner now understands `primitive mat: Material` and injects physics constants into the Z3 context.
 *   **Gearbox Demo**: `neema/examples/gearbox.neema` demonstrates automatic gear train design.
