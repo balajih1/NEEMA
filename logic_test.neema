@@ -1,0 +1,22 @@
+
+meta {
+    id: "urn:igigi:test:logic"
+    authority: "IGIGI_LABS"
+}
+
+entity LogicGate {
+    property a: Float = 10.0
+    property b: Float = 5.0
+    property c: Float = 20.0
+
+    invariant complex_logic {
+        // Testing AND, OR, NOT and Parens
+        require( (a > b) and (c > a) )
+        else error( "AND logic failed" )
+    }
+    
+    invariant negation_check {
+        require( not (a < b) )
+        else error( "NOT logic failed" )
+    }
+}

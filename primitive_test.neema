@@ -1,0 +1,22 @@
+
+meta {
+    id: "urn:igigi:test:prim_v1"
+    authority: "IGIGI_LABS"
+    intent: "civilian_energy"
+    version: 0.1
+}
+
+entity StructuralBeam {
+    // This MUST be a valid code in the DB
+    primitive mat: Material = "AISI_316L"
+    
+    // We expect the governor to inject 'mat_yield_strength' = 200.0 from DB
+    
+    primitive load_case: Load = { type: "static", newtons: 5000.0 }
+
+    invariant strength_check {
+        // Checking if we can reference inferred properties
+        require( load_case_newtons < (mat_yield_strength * 100.0) )
+        else error( "Load exceeds material yield strength" )
+    }
+}

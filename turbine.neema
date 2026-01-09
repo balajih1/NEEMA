@@ -1,0 +1,26 @@
+
+meta {
+    id: "asset-geo-turbine-v9"
+    authority: "IGIGI_HEAVY_INDUSTRIES"
+    classification: "DUAL_USE"
+    version: 1.0
+}
+
+entity GasTurbine {
+    property material_id: String = "CMSX-4"
+    property inlet_temp_k: Float = 1650.0
+    property melting_point_k: Float = 1600.0
+    property cooling_active: Boolean = true
+
+    // PHYSICS CONSTRAINT: Without cooling, you cannot exceed melting point
+    invariant thermodynamics {
+        require( cooling_active == true )
+        else error( "Cannot exceed melting point without active cooling" )
+    }
+    
+    // SAFETY CONSTRAINT: Absolute limit even with cooling
+    invariant absolute_limit {
+        require( inlet_temp_k < 1800.0 )
+        else error( "Inlet temperature exceeds casing structural limits" )
+    }
+}

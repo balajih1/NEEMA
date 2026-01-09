@@ -1,0 +1,33 @@
+
+meta {
+    id: "urn:igigi:measured:gearbox_01"
+    authority: "IGIGI_LABS"
+    intent: "civilian_energy"
+}
+
+entity ReductionGearbox {
+    // === Design Space (Symbolic) ===
+    // IGIGI will solve for these values.
+    property input_teeth: Float = 10.0 .. 50.0
+    property output_teeth: Float = 10.0 .. 200.0
+    property module: Float = 1.0 .. 5.0           // Gear Size
+
+    // === Constants ===
+    primitive mat: Material = "AISI_316L"         // Injects mat_yield_strength (200.0 MPa)
+    property input_torque: Float = 100.0          // Nm
+
+    // === Engineering Constraints ===
+    
+    invariant gear_ratio {
+        // Requirement: Exactly 1:3 Ratio
+        require( output_teeth == (input_teeth * 3.0) )
+    }
+    
+    invariant material_safety {
+        // Simplified Lewis Stress Formula
+        // Stress grows with torque, shrinks with size (module) and tooth count.
+        // Factor 50.0 accounts for geometry constants.
+        // Stress < Yield Strength
+        require( ((input_torque / (module * input_teeth)) * 50.0) < mat_yield_strength )
+    }
+}

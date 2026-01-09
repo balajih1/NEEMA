@@ -1,0 +1,16 @@
+
+meta {
+    id: "urn:igigi:test:contradiction"
+    authority: "IGIGI_LABS"
+    intent: "civilian_energy"
+}
+
+entity ImpossibleObject {
+    // Defined range: 10 to 20
+    property width: Float = 10.0 .. 20.0
+    
+    invariant limits {
+        // But invariant says must be less than 5
+        require( width < 5.0 )
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "protocol": "ALOGI_v1.0",
+  "meta": {
+    "id": "\"geo-test-01\"",
+    "authority": "\"IGIGI_CAD\""
+  },
+  "objects": [
+    {
+      "name": "TestCube",
+      "properties": {},
+      "geometry": {
+        "source": "neema/examples/cube.stl",
+        "format": "STL"
+      },
+      "constraints": [
+        {
+          "name": "volume_check",
+          "condition": "geometry . volume > 999.0"
+        },
+        {
+          "name": "dim_check",
+          "condition": "geometry . width == 10.0"
+        }
+      ]
+    }
+  ]
+}
