@@ -1,0 +1,20 @@
+
+meta {
+    id: "urn:igigi:test:gov_protocol_v1"
+    authority: "IGIGI_LABS"
+    
+    // v0.1 Fields
+    intent: "civilian_energy"
+    risk_class: "dual_use"
+    authority_required: "institutional"
+    
+    version: 0.1
+}
+
+entity GovernorTest {
+    property purpose: String = "Validation of v0.1 Spec"
+    
+    invariant always_pass {
+        require( 1 == 1 )
+    }
+}

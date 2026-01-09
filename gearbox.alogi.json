@@ -1,0 +1,43 @@
+{
+  "protocol": "ALOGI_v1.0",
+  "meta": {
+    "id": "\"urn:igigi:measured:gearbox_01\"",
+    "authority": "\"IGIGI_LABS\"",
+    "intent": "\"civilian_energy\""
+  },
+  "objects": [
+    {
+      "name": "ReductionGearbox",
+      "properties": {
+        "input_teeth": {
+          "type": "Range",
+          "min": "10.0",
+          "max": "50.0"
+        },
+        "output_teeth": {
+          "type": "Range",
+          "min": "10.0",
+          "max": "200.0"
+        },
+        "module": {
+          "type": "Range",
+          "min": "1.0",
+          "max": "5.0"
+        },
+        "mat": "\"AISI_316L\"",
+        "input_torque": "100.0"
+      },
+      "geometry": null,
+      "constraints": [
+        {
+          "name": "gear_ratio",
+          "condition": "output_teeth == ( input_teeth * 3.0 )"
+        },
+        {
+          "name": "material_safety",
+          "condition": "( ( input_torque / ( module * input_teeth ) ) * 50.0 ) < mat_yield_strength"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+
+meta {
+    id: "doomed-turbine"
+    authority: "IGIGI_R&D"
+    classification: "CIVILIAN"
+    version: 0.1
+}
+
+entity UnsafeTurbine {
+    property material_id: String = "CMSX-4"
+    property inlet_temp_k: Float = 1900.0  // Hotter than melting point!
+    property melting_point_k: Float = 1600.0
+    property cooling_active: Boolean = false // No cooling!
+
+    // PHYSICS CONSTRAINT: Should fail here
+    invariant thermodynamics {
+        require( cooling_active == true )
+        else error( "Cannot exceed melting point without active cooling" )
+    }
+    
+    // SAFETY CONSTRAINT: Also fails here
+    invariant absolute_limit {
+        require( inlet_temp_k < 1800.0 )
+        else error( "Inlet temperature exceeds casing structural limits" )
+    }
+}

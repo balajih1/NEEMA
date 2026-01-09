@@ -1,0 +1,23 @@
+
+meta {
+    id: "geo-test-01"
+    authority: "IGIGI_CAD"
+}
+
+entity TestCube {
+    geometry {
+        source: "neema/examples/cube.stl"
+        format: "STL"
+    }
+
+    invariant volume_check {
+        // We know it's a 10x10x10 cube, so volume is 1000
+        require( geometry.volume > 999.0 ) 
+        else error( "Volume calculation is wrong" )
+    }
+
+    invariant dim_check {
+        require( geometry.width == 10.0 )
+        else error( "Width calculation is wrong" )
+    }
+}
